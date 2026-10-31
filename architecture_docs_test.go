@@ -138,7 +138,7 @@ func TestArchitectureDocumentationCoversFinalRuntimeContracts(t *testing.T) {
 			"`outlinerProjectOperationManifest` | Set Check-In and Delete on a task row; " +
 			"Edit, Archive, Delete on a project header |",
 		"A bulk editor starts blank and requires either a date or explicit Clear",
-		"| `ProjectHubInputStrategy` | `ProjectOperationManifest` | Archive or Unarchive, bulk tags |",
+		"| `ProjectHubInputStrategy` | `ProjectOperationManifest` | Archive or Unarchive, Delete, bulk tags |",
 		"| `NotesInputStrategy` | `NotesOperationManifest` | Delete |",
 		"| `AttachmentsInputStrategy` | `attachmentOperationManifest` | three origin acts, Unlink, Delete |",
 		"| `CommentsInputStrategy` | `commentOperationManifest` | Delete |",

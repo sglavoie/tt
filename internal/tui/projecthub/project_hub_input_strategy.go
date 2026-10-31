@@ -21,7 +21,7 @@ const (
 // single source of its footer hints, `?` help, and dispatch. Administering a
 // project is a direct key here rather than a menu row, so the six project
 // operations the Hub reaches carry their own bindings and leave the Space menu
-// to the two lifecycle actions and the bulk tag set.
+// to the lifecycle actions, deletion, and the bulk tag set.
 //
 // The cursor keys, Esc, `?`, and the workspace ledger's undo and redo resolve to
 // the core operations because moving a list cursor, unwinding, asking what the
@@ -80,8 +80,8 @@ func ProjectHubInputStrategy() operation.InputStrategy {
 // ProjectOperationManifest is the authoritative ordered Project Hub action list
 // and the source the action sheet groups by. The fifteen operations the grammar
 // reaches on press one are DirectOnly: they keep their descriptor, value
-// provider and category, and leave the Space menu to archiving, unarchiving, and
-// the bulk tag set.
+// provider and category, and leave the Space menu to archiving, unarchiving,
+// deletion, and the bulk tag set.
 //
 // The nine list operations below the six project ones are here so the one-path
 // rule sees them: a manifest is all ValidateOperationOnePath inspects, so an
@@ -112,6 +112,7 @@ func ProjectOperationManifest() []operation.OperationManifestEntry {
 		{ID: operationProjectBulkUnpark, Label: "Unpark Projects", Category: projectHubActionCategoryProject, Risk: operation.OperationRiskMutation, Bulk: true},
 		{ID: operation.OperationScopeRestoreProject, Label: "Unarchive Project", Aliases: []string{"restore archived project"}, Category: projectHubActionCategoryRecovery, Risk: operation.OperationRiskMutation},
 		{ID: operation.OperationScopeArchiveProject, Label: "Archive Project", Category: projectHubActionCategoryDanger, Risk: operation.OperationRiskDestructive},
+		{ID: operation.OperationProjectDelete, Label: "Delete Project", Aliases: []string{"remove project", "destroy project"}, Category: projectHubActionCategoryDanger, Risk: operation.OperationRiskDestructive},
 	}
 }
 

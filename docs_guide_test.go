@@ -274,8 +274,9 @@ func TestGuideDocumentsProjectsNotesAndTags(t *testing.T) {
 		"`Esc` unwinds one rung at a time: the action sheet, then the query, then the selection, " +
 			"then the surface itself",
 		"`Space` on a project group header opens Project Actions",
-		"Deleting a project is the one act with no second chance, and it asks first, naming the cascade " +
+		"Deleting a project removes it from the workspace and asks first, naming the cascade " +
 			"by name: the project's tasks, its notes, and its attachments all go",
+		"`Space` offers Archive on an active project and Unarchive on an archived one, plus **Delete Project** for either",
 		"The removal and the catalog and planning rewrites beside it are one transaction, so `u` brings " +
 			"every byte back",
 		"The system Unfiled project cannot be deleted, and an archived project still can be",

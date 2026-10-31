@@ -135,6 +135,7 @@ func (m *ProjectHubModel) projectHubItems() []listsurface.ListItem {
 			Preview:              m.projectPreview(project, phase, phrase.text),
 			OperationIDs: append([]operation.OperationID{
 				operation.OperationScopeArchiveProject,
+				operation.OperationProjectDelete,
 			}, projectBulkOperations...),
 			Data: projectHubEntry{Kind: projectHubEntryActive, Project: project},
 		})
@@ -156,6 +157,7 @@ func (m *ProjectHubModel) projectHubItems() []listsurface.ListItem {
 			Preview:       m.projectPreview(project, projectPreviewArchived, m.projectTaskPhraseAt(project, now).text),
 			OperationIDs: []operation.OperationID{
 				operation.OperationScopeRestoreProject,
+				operation.OperationProjectDelete,
 			},
 			Data: projectHubEntry{Kind: projectHubEntryArchived, Project: project},
 		})

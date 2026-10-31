@@ -1,0 +1,38 @@
+{
+  "name": "project-hub-delete-archived",
+  "fixture": "project-mix",
+  "size": "60x20",
+  "actions": [
+    { "type": "key", "key": "P" },
+    { "type": "key", "label": "reach the archived tail without restoring it", "key": "G" },
+    { "type": "key", "key": "space" },
+    { "type": "assert", "assert": "contains", "value": "Unarchive Project" },
+    { "type": "assert", "assert": "contains", "value": "Delete Project" },
+    { "type": "assert", "assert": "no_layout_issues" },
+    { "type": "key", "key": "end" },
+    { "type": "key", "key": "enter" },
+    { "type": "assert", "assert": "contains", "value": "and everything it owns?" },
+    { "type": "assert", "assert": "contains", "value": "Deletes 0 tasks" },
+    { "type": "assert", "assert": "no_layout_issues" },
+    { "type": "key", "key": "y" },
+    { "type": "assert", "assert": "view", "value": "ProjectHub" },
+    { "type": "assert", "assert": "contains", "value": "5 active · 0 archived" },
+    { "type": "assert", "assert": "not_contains", "value": "ARCHIVED PROJECTS" },
+    { "type": "key", "key": "u" },
+    { "type": "assert", "label": "undo retains the original archive state", "assert": "contains", "value": "ARCHIVED PROJECTS" },
+    { "type": "assert", "assert": "contains", "value": "Mix Retired Pilot" },
+    { "type": "assert", "assert": "no_layout_issues" },
+
+    { "type": "restart", "label": "the restored archived project survives relaunch" },
+    { "type": "key", "key": "P" },
+    { "type": "assert", "assert": "contains", "value": "Mix Retired Pilot" },
+    { "type": "key", "key": "/" },
+    { "type": "text", "text": "Unfiled" },
+    { "type": "key", "key": "esc" },
+    { "type": "key", "label": "the protected system project offers no destructive action", "key": "space" },
+    { "type": "assert", "assert": "contains", "value": "No administration actions are available for this project" },
+    { "type": "assert", "assert": "not_contains", "value": "Delete Project" },
+    { "type": "assert", "assert": "not_contains", "value": "Archive Project" },
+    { "type": "assert", "assert": "no_layout_issues" }
+  ]
+}

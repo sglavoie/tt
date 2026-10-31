@@ -1,25 +1,15 @@
 package projecthub
 
 import (
+	"slices"
 	"testing"
 
 	"github.com/sglavoie/docket/internal/tui/operation"
 )
 
-func containsOperationID(ids []operation.OperationID, want operation.OperationID) bool {
-	for _, id := range ids {
-		if id == want {
-			return true
-		}
-	}
-	return false
-}
-
-// TestProjectHubActiveProjectOffersOnlyArchive holds the Space menu to what the
-// direct grammar cannot reach. Opening, editing, pinning, tagging and notes are
-// all one press away, so a single active row offers archiving alone; the four
-// bulk tag actions need a selection and drop out of a one-row sheet.
-func TestProjectHubActiveProjectOffersOnlyArchive(t *testing.T) {
+// Direct operations stay out of Space; a single active row offers archiving and
+// deletion. Bulk tag actions need a selection and drop out of a one-row sheet.
+func TestProjectHubActiveProjectOffersArchiveAndDelete(t *testing.T) {
 	hub := newProjectHubFixture(t,
 		scopeTestProject("alpha", "Alpha", "1", "2"),
 		scopeTestProject("beta", "Beta", "1"),
@@ -28,17 +18,15 @@ func TestProjectHubActiveProjectOffersOnlyArchive(t *testing.T) {
 	hub.Update(syntheticKey(' '))
 
 	got := projectHubActionIDs(hub)
-	if len(got) != 1 || !containsOperationID(got, operation.OperationScopeArchiveProject) {
-		t.Fatalf("active project actions = %v, want archive alone", got)
+	want := []operation.OperationID{operation.OperationScopeArchiveProject, operation.OperationProjectDelete}
+	if !slices.Equal(got, want) {
+		t.Fatalf("active project actions = %v, want %v", got, want)
 	}
 }
 
-// TestProjectHubArchivedProjectSheetOmitsNotes is the sheet half of the archived
-// project's notes refusal: the operation's lifecycle requirement is what keeps it
-// off the row, so the entry never appears for the user to run. The handler half,
-// which refuses the same operation dispatched from any host, is asserted beside
-// the shell that owns it.
-func TestProjectHubArchivedProjectSheetOmitsNotes(t *testing.T) {
+// Archived projects remain deletable without restoring them first. Active-only
+// operations, including notes, stay absent from their sheet.
+func TestProjectHubArchivedProjectOffersUnarchiveAndDelete(t *testing.T) {
 	fixture := newProjectHubFixture(t, scopeTestProject("alpha", "Alpha", "1", "2"))
 	archived := scopeTestProject("archived", "Archived", "1")
 	archived.Archived = true
@@ -47,7 +35,9 @@ func TestProjectHubArchivedProjectSheetOmitsNotes(t *testing.T) {
 	hub := fixture.open()
 	focusProjectHubItem(t, hub, "project-hub:archived:archived")
 	hub.Update(syntheticKey(' '))
-	if got := projectHubActionIDs(hub); containsOperationID(got, operation.OperationScopeOpenProjectNote) {
-		t.Fatalf("archived project offered Open project notes: %v", got)
+	got := projectHubActionIDs(hub)
+	want := []operation.OperationID{operation.OperationScopeRestoreProject, operation.OperationProjectDelete}
+	if !slices.Equal(got, want) {
+		t.Fatalf("archived project actions = %v, want %v", got, want)
 	}
 }

@@ -266,7 +266,7 @@ or project. Clear All Folds, Advisories, Recent Messages and Set Up Check-Ins:
 keyless, target-free. The
 task-row `Space` menu holds Set Check-In under `Schedule` and Delete, identical
 to the bulk menu: the editor saves with `Ctrl+S`; Delete confirms first. The Hub sheet is
-Archive or Unarchive plus bulk tags; Notes and Comments list Delete alone. The
+Archive/Unarchive and Delete; selections use bulk tags. Notes and Comments offer Delete. The
 Outliner project-header sheet is Archive and Delete, and never Unarchive: that
 header is drawn from the active population.
 

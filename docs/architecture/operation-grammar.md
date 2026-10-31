@@ -16,7 +16,7 @@ reads.
 | Strategy | Manifest | Menu keeps |
 | --- | --- | --- |
 | `SimplifiedInputStrategy` | `taskOperationManifest` + `taskDirectOperationManifest` + `outlinerProjectOperationManifest` | Set Check-In and Delete on a task row; Edit, Archive, Delete on a project header |
-| `ProjectHubInputStrategy` | `ProjectOperationManifest` | Archive or Unarchive, bulk tags |
+| `ProjectHubInputStrategy` | `ProjectOperationManifest` | Archive or Unarchive, Delete, bulk tags |
 | `NotesInputStrategy` | `NotesOperationManifest` | Delete |
 | `AttachmentsInputStrategy` | `attachmentOperationManifest` | three origin acts, Unlink, Delete |
 | `CommentsInputStrategy` | `commentOperationManifest` | Delete |

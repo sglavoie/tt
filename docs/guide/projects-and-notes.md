@@ -11,6 +11,7 @@ project tag decides, and the workspace-wide Notes manager.
 | Reach a pinned project | `Ctrl+P` | Open a frequently used project |
 | Create or edit a project | `P`, then `a` or `e` | Set its name, slug, and description |
 | Park a project | `#` on the project, add `parked` | Remove inactive work from Active Projects |
+| Permanently delete a project | `P`, choose a project, `Space` → **Delete Project**, confirm | Remove the project and everything it owns |
 | Read notes | `Ctrl+N` | Open Notes from the Outliner or a project |
 
 Project scope and project search are different: `P` searches project metadata;
@@ -85,7 +86,7 @@ through Select Project. Archiving is one-way
 from there — an Outliner header is only ever drawn for an active project — so
 Unarchive stays here, where an archived project is visible.
 
-Deleting a project is the one act with no second chance, and it asks first,
+Deleting a project removes it from the workspace and asks first,
 naming the cascade by name: the project's tasks, its notes, and its attachments
 all go. The removal and the catalog and planning rewrites beside it are one
 transaction, so `u` brings every byte back. The system Unfiled project cannot be
@@ -97,7 +98,8 @@ removal, never a state that traps a project in the catalog.
 matching the current search. With a selection, `Space` offers Add Tag, Remove
 Tag, Park and Unpark across all of it, and the whole edit commits as one undo
 entry. Without one, `Space` offers Archive on an active project and Unarchive on
-an archived one — the two lifecycle actions no direct key reaches. `Esc` unwinds
+an archived one, plus **Delete Project** for either. Deletion needs no prior
+archive and remains available for parked projects. `Esc` unwinds
 one rung at a time: the action sheet, then the query, then the selection, then
 the surface itself. `?` lists the grammar above rather than the Outliner's, and
 inside the query it is an ordinary character to search for. `u` and `Ctrl+R` sit
